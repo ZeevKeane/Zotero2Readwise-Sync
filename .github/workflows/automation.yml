@@ -5,9 +5,7 @@ on:
     branches:
       - master
   schedule:
-   - cron: "0 3,6,9,15,18,21 * * *" # Runs at 3 AM, 6 AM, 9 AM, 3 PM, 6 PM, and 9 PM UTC every day
-
-    
+    - cron: "0 3,6,9,15,18,21 * * *" # Runs at 3 AM, 6 AM, 9 AM, 3 PM, 6 PM, and 9 PM UTC every day
 
 jobs:
   zotero-to-readwise-automation:
@@ -19,7 +17,7 @@ jobs:
           fetch-depth: 1
 
       - name: 🐍 Set up Python 3.8
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v2.3.0  # Updated version
         with:
           python-version: '3.8'
 
