@@ -10,6 +10,10 @@ on:
 jobs:
   zotero-to-readwise-automation:
     runs-on: ubuntu-latest
+    env:  # Setting environment variables
+      READWISE_TOKEN: ${{ secrets.READWISE_TOKEN }}
+      ZOTERO_KEY: ${{ secrets.ZOTERO_KEY }}
+      ZOTERO_ID: ${{ secrets.ZOTERO_ID }}
     steps:
       - name: 🍽️ Checkout the repo
         uses: actions/checkout@master
@@ -17,7 +21,7 @@ jobs:
           fetch-depth: 1
 
       - name: 🐍 Set up Python 3.8
-        uses: actions/setup-python@v2.3.0  # Updated version
+        uses: actions/setup-python@v2.3.0
         with:
           python-version: '3.8'
 
@@ -28,5 +32,4 @@ jobs:
         run:  curl https://raw.githubusercontent.com/e-alizadeh/Zotero2Readwise/master/zotero2readwise/run.py -o run.py
 
       - name: 🚀 Run Automation
-        run: python run.py --readwise_token ${{ secrets.READWISE_TOKEN }} --zotero_key ${{ secrets.ZOTERO_KEY }} --zotero_library_id ${{ secrets.ZOTERO_ID }}
-
+        run: python run.py $READWISE_TOKEN $ZOTERO_KEY $ZOTERO_ID  # Using environment variables
